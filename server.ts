@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response, Application } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import connect from "./config/db";
@@ -12,7 +12,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
 connect();
 
-app.use('/user',auth)
+app.get("/", (req: Request, res: Response) => {
+  res.send("Node js server is running.");
+});
+
+app.use('/user', auth)
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
